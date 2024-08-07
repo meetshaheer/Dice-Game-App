@@ -14,6 +14,7 @@ class myApp extends StatelessWidget {
     return const MaterialApp(
       home: dice(),
       debugShowCheckedModeBanner: false,
+      title: "Roll Dice",
     );
   }
 }
