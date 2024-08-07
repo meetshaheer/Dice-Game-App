@@ -17,6 +17,7 @@ class myApp extends StatelessWidget {
     );
   }
 }
+//      colors: [Color.fromARGB(255, 37, 8, 86), Color.fromARGB(255, 18, 4, 56)],
 
 class dice extends StatefulWidget {
   const dice({super.key});
@@ -35,20 +36,23 @@ class _diceState extends State<dice> {
     });
   }
 
+  Gradient gradientColor(Color color1, Color color2) {
+    return LinearGradient(
+      colors: [color1, color2],
+      begin: Alignment.topRight,
+      end: Alignment.bottomCenter,
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       body: Container(
-        decoration: const BoxDecoration(
-          gradient: LinearGradient(
-            colors: [
-              Color.fromARGB(255, 37, 8, 86),
-              Color.fromARGB(255, 18, 4, 56)
-            ],
-            begin: Alignment.topRight,
-            end: Alignment.bottomCenter,
-          ),
-        ),
+        decoration: BoxDecoration(
+            gradient: gradientColor(
+          Color.fromARGB(255, 37, 8, 86),
+          Color.fromARGB(255, 18, 4, 56),
+        )),
         child: Center(
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
@@ -67,16 +71,18 @@ class _diceState extends State<dice> {
                   onPressed: () {
                     rollDice();
                   },
-                  child: const Text(
-                    "Roll Up",
-                    style: TextStyle(
-                        fontSize: 22, color: Color.fromARGB(255, 24, 3, 59)),
-                  ),
                   style: ButtonStyle(
                     shape: MaterialStatePropertyAll<RoundedRectangleBorder>(
                       RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(30),
                       ),
+                    ),
+                  ),
+                  child: const Text(
+                    "Roll Up",
+                    style: TextStyle(
+                      fontSize: 22,
+                      color: Color.fromARGB(255, 24, 3, 59),
                     ),
                   ),
                 ),
