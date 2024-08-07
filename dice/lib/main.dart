@@ -1,3 +1,5 @@
+import 'dart:math';
+
 import 'package:flutter/material.dart';
 
 void main(List<String> args) {
@@ -16,8 +18,22 @@ class myApp extends StatelessWidget {
   }
 }
 
-class dice extends StatelessWidget {
+class dice extends StatefulWidget {
   const dice({super.key});
+
+  @override
+  State<dice> createState() => _diceState();
+}
+
+class _diceState extends State<dice> {
+  var activeDiceImage = "assets/images/dice-1.png";
+
+  rollDice() {
+    var randomNumber = Random().nextInt(6) + 1;
+    setState(() {
+      activeDiceImage = "assets/images/dice-$randomNumber.png";
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -31,6 +47,41 @@ class dice extends StatelessWidget {
             ],
             begin: Alignment.topRight,
             end: Alignment.bottomCenter,
+          ),
+        ),
+        child: Center(
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              Image.asset(
+                activeDiceImage,
+                width: 180,
+              ),
+              SizedBox(
+                height: 100,
+              ),
+              SizedBox(
+                height: 70,
+                width: 150,
+                child: ElevatedButton(
+                  onPressed: () {
+                    rollDice();
+                  },
+                  child: const Text(
+                    "Roll Up",
+                    style: TextStyle(
+                        fontSize: 22, color: Color.fromARGB(255, 24, 3, 59)),
+                  ),
+                  style: ButtonStyle(
+                    shape: MaterialStatePropertyAll<RoundedRectangleBorder>(
+                      RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(30),
+                      ),
+                    ),
+                  ),
+                ),
+              ),
+            ],
           ),
         ),
       ),
